@@ -1,0 +1,4 @@
+@import "tailwindcss";
+.head {
+  @apply text-4xl;
+}
