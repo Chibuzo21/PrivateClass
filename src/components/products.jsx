@@ -7,6 +7,8 @@ import React from "react";
 import { productFn } from "../lib/productFn";
 import { useQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
+import { Link } from "react-router-dom";
+
 export default function Products() {
   const { data, isLoading, isError, error } = useQuery({
     queryFn: productFn,
@@ -26,16 +28,35 @@ export default function Products() {
       </div>
     );
   return (
-    <div className='flex flex-col  justify-center items-center min-h-screen'>
-      <div className='max-w-5xl space-y-10'>
+    <div className='flex flex-col p-10  justify-center items-center min-h-screen '>
+      <h1 className='text-center mb-5 font-semibold text-2xl'>OUR PRODUCTS</h1>
+      <div className='flex justify-end items-center w-full'>
+        <Link
+          to='/new'
+          className='bg-blue-900 text-primary-foreground px-3 rounded-md py-2'>
+          Add new +
+        </Link>
+      </div>
+
+      <div className='mt-10 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5'>
         {data.map((product) => (
-          <div key={product.id} className='space-y-2'>
+          <div
+            key={product.id}
+            className='space-y-2 group/card flex flex-col gap-(--card-spacing) overflow-hidden rounded-xl bg-card py-(--card-spacing) text-sm text-card-foreground ring-1 ring-foreground/10 p-4'>
             <img src={product.image} className='h-48 object-cover' />
             <p>Title: {product.title}</p>
-            <p className='text-sm'>Description:{product.description}</p>
+            <div>
+              <p className=' text-xs text-muted-foreground'>
+                Description:{product.description}
+              </p>{" "}
+            </div>
             <p>Category: {product.category}</p>
-            <p>Price: {product.price}</p>
-            <p>Rating:{product.rating.rate}</p>
+            <div className='flex justify-between items-center'>
+              <span className='font-bold text-lg'>{product.price}</span>
+              <span className='text-xs text-muted-foreground'>
+                {product.rating.count} {product.rating.rate}
+              </span>
+            </div>
           </div>
         ))}
       </div>
