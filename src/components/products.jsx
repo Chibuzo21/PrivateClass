@@ -8,6 +8,7 @@ import { productFn } from "../lib/productFn";
 import { useQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import ProductForm from "./productForm";
 
 export default function Products() {
   const { data, isLoading, isError, error } = useQuery({

@@ -10,35 +10,61 @@ import {
   FieldSet,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { useForm } from "react-hook-form";
 import { months } from "../lib/data";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { productSchema } from "../lib/schema";
 // zod is the tool that handles validation in your form. it provides the shape for your data. @/hookform/resolvers is what links your react hook form to your zod
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createProduct } from "../lib/CreateProduct";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductForm() {
+  const navigate = useNavigate(); //usenavigate is a hook for moving from one route to another. it performs the work of Link and NavLink
+  const queryClient = useQueryClient();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm({ resolver: zodResolver(productSchema) });
-
+  const { mutate, isPending, isError, error } = useMutation({
+    mutationFn: createProduct,
+    // mutationFn is simply the function that mutates data which could be data creation, update or deletion
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["products"],
+      });
+      toast.success("Success", {
+        description: "Your product was created successfully",
+        position: "top-right",
+      });
+      setTimeout(() => {
+        navigate("/");
+      }, 600);
+    },
+    // onSuccess is you stating what you want to happen when the mutation process succeeds
+    onError: () => {
+      toast.error("Failed", {
+        description: "Your product could not be created",
+        position: "top-right",
+      });
+    },
+    // onError is you stating what you want to happen when the mutation process fails
+  });
   const submitFn = (data) => {
     console.log(data);
-    setTimeout(() => {
-      reset();
-    }, 700); //setTimeout is used for delay ie how long it should delay before an operation is carried out
+    const { rate, count, ...others } = data;
+    mutate({ ...others, rating: { rate, count } });
+
+    // setTimeout(() => {
+    //   reset();
+    // }, 700); //setTimeout is used for delay ie how long it should delay before an operation is carried out
   };
+
   return (
     <div className='w-full mx-auto max-w-5xl  p-10'>
       <h1 className='text-3xl font-semibold mb-5'>New Product</h1>
@@ -167,7 +193,9 @@ export default function ProductForm() {
           </FieldSet>
 
           <Field orientation='horizontal'>
-            <Button type='submit'>Submit</Button>
+            <Button disabled={isPending} type='submit'>
+              {isPending ? "Submitting ..." : "Submit"}
+            </Button>
             <Button variant='outline' type='button'>
               Cancel
             </Button>
