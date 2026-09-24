@@ -130,4 +130,11 @@
   html {
     @apply font-sans;
   }
+  form div input,
+  textarea {
+    @apply border border-gray-700 px-4 py-3 rounded-md w-full;
+  }
+  select {
+    @apply border w-full border-gray-700 px-4 py-3 rounded-md;
+  }
 }

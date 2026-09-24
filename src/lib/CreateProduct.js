@@ -8,6 +8,6 @@ export const createProduct = async (data) => {
     },
     body: JSON.stringify(data), //we use JSON.stringify to convert our data to json format because that is the format our api works with. Also whatever data you send has to be an object
   });
-  if (!response.ok) return "Network issues";
+  if (!response.ok) throw new Error("Network issues");
   return await response.json();
 };

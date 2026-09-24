@@ -34,10 +34,8 @@ export default function ProductForm() {
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: createProduct,
     // mutationFn is simply the function that mutates data which could be data creation, update or deletion
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["products"],
-      });
+    onSuccess: (data) => {
+      queryClient.setQueryData(["products"], (old = []) => [...old, data]);
       toast.success("Success", {
         description: "Your product was created successfully",
         position: "top-right",
@@ -56,9 +54,8 @@ export default function ProductForm() {
     // onError is you stating what you want to happen when the mutation process fails
   });
   const submitFn = (data) => {
-    console.log(data);
-    const { rate, count, ...others } = data;
-    mutate({ ...others, rating: { rate, count } });
+    // const { rate, count, ...others } = data;
+    mutate(data);
 
     // setTimeout(() => {
     //   reset();

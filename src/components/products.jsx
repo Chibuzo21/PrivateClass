@@ -6,14 +6,15 @@ import React from "react";
 // After installing tanstack/react-query, the first step is to create a client and wrap your component with it. i will do this in my main.jsx
 import { productFn } from "../lib/productFn";
 import { useQuery } from "@tanstack/react-query";
-import { Loader2 } from "lucide-react";
+import { Edit, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import ProductForm from "./productForm";
 
 export default function Products() {
   const { data, isLoading, isError, error } = useQuery({
     queryFn: productFn,
-    queryKey: ["products"], //queryKey is used by tanstack to keep track of your function.
+    staleTime: Infinity, //this is just for learning purpose
+    queryKey: ["products"], //queryKey is used by tanstack to keep track of your query data.
   });
   console.log(data);
   if (isLoading)
@@ -55,8 +56,11 @@ export default function Products() {
             <div className='flex justify-between items-center'>
               <span className='font-bold text-lg'>{product.price}</span>
               <span className='text-xs text-muted-foreground'>
-                {product.rating.count} {product.rating.rate}
+                {product.rating?.count} {product.rating?.rate}
               </span>
+              <Link to={`/${product.id}`}>
+                <Edit className='size-4' />
+              </Link>
             </div>
           </div>
         ))}

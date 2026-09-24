@@ -7,6 +7,6 @@ export const productSchema = z.object({
     message: "Select a valid category",
   }),
   price: z.coerce.number().positive("Price must be greater than 0"),
-  count: z.coerce.number().positive("Count must be greater than 0"),
-  rate: z.coerce.number().positive("Rate must be greater than 0"),
+  // count: z.coerce.number().positive("Count must be greater than 0"),
+  // rate: z.coerce.number().positive("Rate must be greater than 0"),
 });
