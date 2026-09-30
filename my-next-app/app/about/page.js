@@ -1,3 +1,4 @@
+//"use client" this means that this component will be rendered on the client
 import React from "react";
 import Header from "@/components/header";
 import Mepage from "./me/page";
