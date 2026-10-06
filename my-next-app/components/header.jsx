@@ -7,6 +7,7 @@ export default function Header() {
       <Link href='/contact'>Contact</Link>
       <Link href='/about'>About</Link>
       <Link href='/products'>Products</Link>
+      <Link href='/student'>Student</Link>
     </nav>
   );
 }
