@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const getStudent = async () => {
@@ -19,6 +20,13 @@ export default async function StudentPage() {
           <p>{s.age}</p>
         </div>
       ))}
+      <div className='flex justify-end px-10'>
+        <Link
+          className='bg-orange-800 p-4 text-white mt-8 rounded-md '
+          href='/students/create-user '>
+          Go to Create Student Page
+        </Link>
+      </div>
     </div>
   );
 }
