@@ -1,3 +1,6 @@
 The type of API we hava been working with is called REST API. Other types of API include SOAP, web socket, GRAPHQL, web hooks . REST is an acronym for Representational State Transfer. It uses HTTP protocols which include GET, POST, PATCH etc. REST mostly uses CRUD operations. CRUD means create, read, update, delete
 Next js uses Route Handlers to handle api end points. The difference between this api routes and the page routes is that api routes helps us to build restful endpoints while the page routes are used to build HTML contents
 Route handlers are great for building communication with a third party service. They run on the server, therefore sensitive information like private keys stay secure and never reaches the browser.
+
+Because the client component cannot or should not have direct access to the database, it has to depend on two means to be able to get the data in the database. These means includes: server actions(functions written in the server) and route handlers.
+Route handlers can actually do everything that server actions can do, but a server action cannot do everything a route handler can do. server actions is best used for handling internal data operations while route handlers can handle both internal and external data operations and it runs on http

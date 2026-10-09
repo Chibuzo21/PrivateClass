@@ -1,12 +1,12 @@
 import React from "react";
 import Image from "next/image";
-import image1 from "@/public/a.jpg";
-import image2 from "@/public/b.jpeg";
-import image3 from "@/public/c.jpg";
-import image4 from "@/public/d.jpg";
+
 import Link from "next/link";
 export default function ProductsPage() {
   const images = ["/a.jpg", "/b.jpeg", "/c.jpg", "/d.jpg"];
+  const Add = () => {
+    return 1 + 1;
+  };
   return (
     <div className='grid md:grid-cols-2 grid-cols-1 gap-8'>
       {images.map((image, index) => (
