@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Link from "next/link";
 export default function Header() {
@@ -8,6 +7,7 @@ export default function Header() {
       <Link href='/about'>About</Link>
       <Link href='/products'>Products</Link>
       <Link href='/students'>Student</Link>
+      <Link href='/bookmark'>Bookmark</Link>
     </nav>
   );
 }
