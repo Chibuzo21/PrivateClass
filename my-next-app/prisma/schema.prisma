@@ -16,6 +16,5 @@ model Bookmark{
   id  Int  @id @default(autoincrement())
   title String
   url String
-  createdAt DateTime @default(now())
-  
+  createdAt DateTime @default(now())  
 }
