@@ -2,12 +2,13 @@ import React from "react";
 import Link from "next/link";
 export default function Header() {
   return (
-    <nav className='bg-slate-800 text-foreground py-8 flex items-center gap-2'>
+    <nav className='bg-slate-800 text-foreground py-8 flex items-center gap-4'>
       <Link href='/contact'>Contact</Link>
       <Link href='/about'>About</Link>
       <Link href='/products'>Products</Link>
       <Link href='/students'>Student</Link>
       <Link href='/bookmark'>Bookmark</Link>
+      <Link href='/profile'>Profile</Link>
     </nav>
   );
 }

@@ -18,3 +18,12 @@ model Bookmark{
   url String
   createdAt DateTime @default(now())  
 }
+
+model Profile{
+  id Int @id @default(autoincrement())
+  name String
+  email String @unique //unique means two profiles cannot have the same email
+  bio String? //? means optional field
+  createdAt DateTime @default(now())
+}
+// after making a change to your database table or creating a new table run these commands: 1) npx prisma migrate dev --name action. (action should be whatever migration change you are making).2 ) npx prisma generate (This updates the prisma client so you can access the new model)
